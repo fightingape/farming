@@ -32,7 +32,7 @@ public class TokenController {
             @ApiImplicitParam(name = "origin", value = "存储源，如七牛云、阿里云、hdfs本地实现等，可扩展", required = true, dataType = "String", paramType="query"),
             @ApiImplicitParam(name = "params", value = "生成所需的参数，json格式，包括UploadStrategy，同时包含各存储源的特殊化参数，如七牛云需要指定生成的凭证类型(上传、下载、管理)", required = true, paramType="body")
     })
-    @PostMapping(value = "/l/generatetoken")
+    @PostMapping(value = "/generatetoken")
     public RestResponse<String> generateToken(@RequestParam("origin")String origin,
                                               @RequestBody Map<String,Object> params){
         UploadStrategy uploadStrategy = convertParams2UploadStrategy(params);
@@ -43,7 +43,7 @@ public class TokenController {
     private UploadStrategy convertParams2UploadStrategy(Map<String, Object> params) {
         //TODO: 参数校验，更详细的写法
         String json = JSON.toJSONString(params);
-        UploadStrategy uploadStrategy = JSONObject.parseObject(json,UploadStrategy.class);
+        UploadStrategy uploadStrategy = JSONObject.parseObject(json, UploadStrategy.class);
         return uploadStrategy;
     }
 

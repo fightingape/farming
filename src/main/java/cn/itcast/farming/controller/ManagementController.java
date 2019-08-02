@@ -23,7 +23,7 @@ public class ManagementController {
 
     @ApiOperation(value="后端业务批量生成下载url", notes="后端业务批量生成下载url")
     @ApiImplicitParam(name = "fileKeys", value = "文件资源key，逗号分隔", required = true, dataType = "String", paramType="query")
-    @PostMapping(value = "/l/generatedownloadurls")
+    @PostMapping(value = "/generatedownloadurls")
     public RestResponse<Map<String, String>> downloadUrl(@RequestParam("fileKeys") String[] fileKeys) throws Exception{
         Map<String, String> urlMap = fileService.generateDownloadUrls(fileKeys);
         return RestResponse.success(urlMap);
@@ -32,7 +32,7 @@ public class ManagementController {
 
     @ApiOperation(value="后端业务批量删除文件", notes="后端业务批量删除文件")
     @ApiImplicitParam(name = "fileKeys", value = "文件key列表，逗号分隔", required = true, dataType = "String", paramType="query")
-    @PostMapping(value = "/l/deleteFiles")
+    @PostMapping(value = "/deleteFiles")
     public RestResponse<String> deleteFiles(@RequestParam("fileKeys") String[] fileKeys){
         return fileService.deleteFiles(fileKeys);
     }
